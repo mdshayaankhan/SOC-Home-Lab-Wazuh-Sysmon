@@ -2,41 +2,15 @@
 
 ## Overview
 
-This project demonstrates the implementation of a Security Operations Center (SOC) Home Lab using Wazuh SIEM and Microsoft Sysmon for real-time endpoint monitoring, log analysis, threat detection, and security event investigation.
+This project demonstrates the implementation of a Security Operations Center (SOC) Home Lab using Wazuh SIEM and Microsoft Sysmon for real-time endpoint monitoring, threat detection, security event analysis, and incident investigation.
 
-The lab simulates a real-world SOC environment where security events generated on a Windows endpoint are collected, analyzed, and visualized through Wazuh. The project showcases practical experience in SIEM administration, threat hunting, endpoint monitoring, MITRE ATT&CK mapping, and incident investigation.
-
----
-
-## Objectives
-
-* Build a functional SOC Home Lab environment.
-* Monitor endpoint activities in real time.
-* Centralize security log collection and analysis.
-* Detect suspicious activities using SIEM rules.
-* Perform threat hunting and alert investigation.
-* Map detected activities to the MITRE ATT&CK framework.
-* Demonstrate practical SOC Analyst skills.
+The environment consists of a Windows 11 endpoint monitored by Sysmon and a Wazuh Agent, which forwards security events to a Wazuh Server deployed on Ubuntu. The collected logs are analyzed and visualized through the Wazuh Dashboard, enabling threat hunting and security monitoring.
 
 ---
 
 ## Architecture
 
-```text
-Windows 11 Endpoint
-       │
-       │ Sysmon Events
-       ▼
-   Wazuh Agent
-       │
-       │ Log Forwarding
-       ▼
-Ubuntu Server
-(Wazuh Manager + Indexer + Dashboard)
-       │
-       ▼
-Threat Hunting & Alert Analysis
-```
+![SOC Architecture](screenshots/architecture.png)
 
 ---
 
@@ -53,71 +27,196 @@ Threat Hunting & Alert Analysis
 
 ---
 
+## System Architecture
+
+```text
+Windows 11 Endpoint
+│
+├── Sysmon
+├── Wazuh Agent
+│
+▼
+Ubuntu Server
+├── Wazuh Manager
+├── Wazuh Indexer
+└── Wazuh Dashboard
+│
+▼
+Threat Hunting & Security Monitoring
+```
+
+---
+
 ## Features Implemented
 
 ### Endpoint Monitoring
 
-* Connected Windows 11 endpoint to Wazuh using Wazuh Agent.
-* Continuous collection of security events.
+* Connected Windows 11 endpoint to Wazuh.
+* Centralized log collection and analysis.
 
 ### Sysmon Integration
 
-* Installed and configured Microsoft Sysmon.
-* Captured process creation and system activity events.
-* Enhanced endpoint visibility.
+* Process creation monitoring.
+* Command-line monitoring.
+* PowerShell activity monitoring.
+* Registry monitoring.
 
 ### Threat Hunting
 
-* Investigated security events using Wazuh Threat Hunting.
-* Filtered and analyzed endpoint telemetry.
+* Event investigation using Wazuh Threat Hunting.
+* Security alert analysis.
 
 ### MITRE ATT&CK Mapping
 
-* Detected activities mapped to MITRE ATT&CK techniques.
-* Examples:
+* Automatic mapping of detected activities to ATT&CK techniques.
 
-  * T1059.001 – PowerShell
-  * T1059.003 – Windows Command Shell
-  * T1087 – Account Discovery
-  * T1565.001 – File Modification
+### File Integrity Monitoring
 
-### File Integrity Monitoring (FIM)
-
-* Monitored file modifications and integrity changes.
-* Generated alerts for file activity.
+* Detection of file modifications.
+* Integrity checksum monitoring.
 
 ### Registry Monitoring
 
-* Detected registry key modifications and deletions.
-* Generated security alerts for registry events.
+* Registry key modification detection.
+* Registry deletion detection.
 
 ### Real-Time Alerting
 
-* Generated alerts for suspicious command execution and system activity.
-* Centralized alert visualization through Wazuh Dashboard.
+* Suspicious command execution alerts.
+* Discovery activity alerts.
+* PowerShell execution alerts.
 
 ---
 
-## Demonstration Scenarios
+# Screenshots
 
-### Command Execution Detection
+## 1. Wazuh Dashboard Overview
+
+![Dashboard Overview](screenshots/dashboard-overview.png)
+<img width="2520" height="1350" alt="image" src="https://github.com/user-attachments/assets/0d2e93ac-8e53-43c4-8ee3-e03928c46839" />
+
+Shows the main Wazuh dashboard and security monitoring overview.
+
+---
+
+## 2. Active Agent Connected
+
+![Agent Connected](screenshots/agent-connected.png)
+<img width="838" height="768" alt="Screenshot 2026-06-13 130724" src="https://github.com/user-attachments/assets/43022b99-1443-4be1-96b5-b1d1b5006e60" />
+<img width="2520" height="1344" alt="Screenshot 2026-06-13 125957" src="https://github.com/user-attachments/assets/8d5195ec-4fe8-42d8-a880-3cf5521dc1eb" />
+
+Demonstrates successful connection between the Windows endpoint and Wazuh Manager.
+
+---
+
+## 3. Sysmon Integration
+
+![Sysmon Events](screenshots/sysmon-events.png)
+
+Shows Sysmon-generated events being collected and analyzed by Wazuh.
+
+---
+<img width="1834" height="942" alt="Screenshot 2026-06-13 133045" src="https://github.com/user-attachments/assets/1c9dd9cf-eab2-405f-8c04-fb53aecc4f41" />
+
+<img width="1530" height="596" alt="Screenshot 2026-06-13 134750" src="https://github.com/user-attachments/assets/a85962f0-924b-4488-8f9f-a73ba8c44b14" />
+
+
+## 4. Threat Hunting
+
+![Threat Hunting](screenshots/threat-hunting.png)
+
+Demonstrates event investigation and threat hunting capabilities.
+
+
+---
+
+## 5. MITRE ATT&CK Mapping
+
+![MITRE ATT\&CK](screenshots/mitre-mapping.png)
+
+Shows security events mapped to ATT&CK techniques such as:
+
+<img width="2026" height="1002" alt="Screenshot 2026-06-13 140939" src="https://github.com/user-attachments/assets/915e7588-2929-4c76-a916-5b6dc02f16a1" />
+
+
+
+* T1059.001 – PowerShell
+* T1059.003 – Windows Command Shell
+* T1087 – Account Discovery
+* T1565.001 – File Modification
+
+---
+
+## 6. Suspicious Command Execution Detection
+
+![Command Execution](screenshots/cmd-detection.png)
+
+Detection of suspicious command shell execution activities.
+<img width="2484" height="764" alt="Screenshot 2026-06-13 141651" src="https://github.com/user-attachments/assets/55eacd9d-be20-4e6a-b693-4e882d474ad5" />
+
+---
+
+## 7. PowerShell Activity Detection
+
+![PowerShell Detection](screenshots/powershell-detection.png)
+<img width="2484" height="764" alt="Screenshot 2026-06-13 141651" src="https://github.com/user-attachments/assets/1d70b4ac-a2be-4723-ab8d-31897e894817" />
+
+Monitoring and detection of PowerShell-based activities.
+
+---
+
+## 8. File Integrity Monitoring (FIM)
+
+![File Integrity Monitoring](screenshots/file-integrity-monitoring.png)
+
+Demonstrates detection of file modifications through integrity checksum monitoring.
+<img width="2040" height="480" alt="Screenshot 2026-06-14 140154" src="https://github.com/user-attachments/assets/af9ed214-5754-4f18-905c-259b6fbe152e" />
+
+---
+
+## 9. Registry Monitoring
+
+![Registry Monitoring](screenshots/registry-monitoring.png)
+
+Detection of registry key creation, modification, and deletion events.
+<img width="1980" height="598" alt="Screenshot 2026-06-13 133449" src="https://github.com/user-attachments/assets/8b4dcd1e-7490-4591-b7a6-082a5b6581bd" />
+
+---
+
+## 10. Security Alerts
+
+![Security Alerts](screenshots/security-alerts.png)
+
+Shows real-time alerts generated by Wazuh.
+<img width="1980" height="598" alt="Screenshot 2026-06-13 133449" src="https://github.com/user-attachments/assets/0dde2f12-e892-448f-bf4b-e8b1d3c5c79a" />
+
+---
+
+## Detection Scenarios Performed
+
+### Account Discovery
 
 Commands executed:
 
 ```cmd
 whoami
 hostname
-ipconfig
 net user
 ```
 
-Detected by:
+Detected and mapped to ATT&CK techniques.
 
-* Sysmon
-* Wazuh SIEM
-* MITRE ATT&CK Mapping
+### Command Execution
 
----
+Commands executed:
+
+```cmd
+ipconfig
+tasklist
+systeminfo
+```
+
+Generated command execution alerts.
 
 ### PowerShell Monitoring
 
@@ -129,24 +228,19 @@ Get-Service
 Get-LocalUser
 ```
 
-Generated PowerShell-related events and detections.
-
----
+Generated PowerShell execution events.
 
 ### File Integrity Monitoring
 
 Actions performed:
 
 ```powershell
-echo "test" > C:\SOC_Test\test.txt
+echo "SOC Test" > C:\SOC_Test\test.txt
 Add-Content C:\SOC_Test\test.txt "modified"
 Remove-Item C:\SOC_Test\test.txt
 ```
 
-Detected by:
-
-* Wazuh File Integrity Monitoring
-* Integrity Checksum Change Alerts
+Generated integrity monitoring alerts.
 
 ---
 
@@ -154,49 +248,31 @@ Detected by:
 
 Successfully implemented:
 
-* Centralized log collection
-* Endpoint monitoring
-* Sysmon event collection
-* Threat hunting
-* MITRE ATT&CK mapping
-* File integrity monitoring
-* Registry monitoring
-* Real-time alert generation
-
-The SOC Home Lab provides hands-on experience with technologies and workflows commonly used by Security Operations Center (SOC) Analysts.
-
----
-
-## Screenshots
-
-Add screenshots for:
-
-* Architecture Diagram
-* Wazuh Dashboard
-* Agent Connected
-* Sysmon Events
+* Security Operations Center (SOC) Home Lab
+* Wazuh SIEM Deployment
+* Sysmon Integration
+* Endpoint Monitoring
 * Threat Hunting
-* MITRE ATT&CK Alerts
-* File Integrity Monitoring Alerts
-* Registry Monitoring Alerts
+* MITRE ATT&CK Mapping
+* File Integrity Monitoring
+* Registry Monitoring
+* Real-Time Alerting
+* Security Event Investigation
 
 ---
 
 ## Skills Demonstrated
 
-* Security Operations Center (SOC)
 * SIEM Administration
 * Wazuh
 * Sysmon
 * Threat Hunting
-* Log Analysis
 * Incident Investigation
-* Endpoint Monitoring
-* File Integrity Monitoring
-* Registry Monitoring
-* MITRE ATT&CK
+* Endpoint Security Monitoring
 * Windows Security
 * Linux Administration
+* MITRE ATT&CK
+* Security Operations Center (SOC)
 
 ---
 
@@ -204,4 +280,6 @@ Add screenshots for:
 
 **Md Shayaan Khan**
 
-Computer Science & Engineering Student | Cybersecurity Enthusiast | SOC Analyst Aspirant
+Computer Science & Engineering Student
+
+Cybersecurity Enthusiast | SOC Analyst Aspirant
