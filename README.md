@@ -10,7 +10,7 @@ The environment consists of a Windows 11 endpoint monitored by Sysmon and a Wazu
 
 ## Architecture
 
-![SOC Architecture](screenshots/architecture.png)
+![SOC Architecture]
 
 ---
 
